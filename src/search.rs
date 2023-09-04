@@ -7,7 +7,7 @@ pub fn find<P: AsRef<Path>>(root: P, regex: &Regex) -> Result<(Vec<String>, usiz
     let mut unmatches = Vec::new();
     walk_tree(root.as_ref(), regex, &mut matches, &mut unmatches)?;
     let match_count = matches.len();
-    (&mut matches).append(&mut unmatches);
+    matches.append(&mut unmatches);
     Ok((matches, match_count))
 }
 
