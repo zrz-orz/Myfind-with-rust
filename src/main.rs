@@ -1,6 +1,7 @@
 use regex::Regex;
 use std::env;
 use std::process;
+use colored::Colorize;
 mod search;
 
 
@@ -22,13 +23,32 @@ fn main() {
     };
 
     match search::find(&args[1], &regex) {
-        Ok(matches) => {
+        Ok((matches, cnt)) => {
             if matches.is_empty() {
                 println!("didn't find any matches");
             } else {
                 println!("find following matches");
-                for file in matches {
-                    println!("{}", file);
+                
+                if args.len() > 3 && (args[3] == "-v" || args[3] == "--verbose") {
+                    
+                    let mut i = 0;
+                    for file in &matches {
+                        if i < cnt {
+                            println!("{}", file.green().bold());
+                        } else {
+                            println!("{}", file.red());
+                        }
+                        i += 1;
+                    }
+                } else {
+                    let mut i = 0;
+                    for file in &matches {
+                        println!("{}", file.green().bold());
+                        i += 1;
+                        if i >= cnt {
+                            break;
+                        }
+                    }
                 }
             }
         }
