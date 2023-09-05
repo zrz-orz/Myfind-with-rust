@@ -7,7 +7,7 @@
 ### Usage
 
 ```
-myfind <target dir> <regular expression> (-v / --verbose)
+myfind {} <dir num> <target dir1> <target dir2> ... <regex num> <target regular expression1> <target regular expression2> ... (-v / --verbose)
 ```
 
 ### 作业相关
